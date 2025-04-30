@@ -10,6 +10,9 @@ COPY ./requirements.txt .
 
 RUN apt-get update && \
 	apt-get install python3-tk \
+	tk \
+	tcl \
+	libgl1-mesa-glx \
 	libgl1 \
 	libgomp1 \
 	build-essential \

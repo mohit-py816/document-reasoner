@@ -9,7 +9,7 @@ class DocumentManager:
     def __init__(self):
         self.loaded_documents = {}  # {doc_id: {path: str, content: str, meta: dict}}
         self.vector_manager = VectorManager()
-        self.chunking = TextChuncker()
+        self.chunking = TextChunker()
 
     def add_document(self, file_path: str) -> str:
 

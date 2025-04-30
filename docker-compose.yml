@@ -5,7 +5,7 @@ services:
     networks:
       - python-ntwk
     environment:
-      DISPLAY: ${WINDOWS_IP}:0
+      DISPLAY: $WINDOWS_IP:0
       LIBGL_ALWAYS_INDIRECT: 1
     env_file:
       - .env
@@ -13,6 +13,8 @@ services:
       - ./models:/app/models
       - ./data:/app/data
       - /tmp/.X11-unix:/tmp/.x11-unix:rw
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - qdrant
 
@@ -25,6 +27,7 @@ services:
       - qdrant_data:/qdrant/storage
     networks:
       - python-ntwk
+    restart: always
 
 networks:
   python-ntwk:

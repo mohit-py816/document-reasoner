@@ -2,6 +2,7 @@ import time
 from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, VectorParams, PointStruct
 from qdrant_client.http import exceptions as qdrant_exceptions
+from qdrant_client.http import models
 from sentence_transformers import SentenceTransformer
 from src.config.settings import EmbeddingModels, VectorConfig
 import numpy as np
@@ -11,8 +12,11 @@ logger = logging.getLogger(__name__)
 
 class VectorManager:
     def __init__(self, model_name: str = EmbeddingModels.SENTENCE_BERT.value):
-        self.client = QdrantClient(host=VectorConfig.QDRANT_LOCATION.split(":")[0],
-                                 port=int(VectorConfig.QDRANT_LOCATION.split(":")[1]))
+        self.client = QdrantClient(
+                            host=VectorConfig.QDRANT_LOCATION.split(":")[0],
+                            port=int(VectorConfig.QDRANT_LOCATION.split(":")[1]),
+                            prefer_grpc=True
+                      )
         self.embedding_model = self._init_model(model_name)
         self._init_collection()
 
@@ -45,15 +49,21 @@ class VectorManager:
     def _init_collection(self):
         """Create collection if it doesn't exist"""
         try:
-            self.client.get_collection(VectorConfig.COLLECTION_NAME)
-        except qdrant_exceptions.UnexpectedResponse:
-            self.client.create_collection(
-                collection_name=VectorConfig.COLLECTION_NAME,
-                vectors_config=VectorParams(
-                    size=self._get_embedding_size(),
-                    distance=Distance.COSINE
-                )
-            )
+            collection_info = self.client.get_collection(VectorConfig.COLLECTION_NAME)
+            if collection_info.vectors_count == 0:
+                self._create_collection()
+        except Exception:
+           self._create_collection()
+
+    def _create_collection(self):
+        self.client.recreate_collection(
+            collection_name = VectorConfig.COLLECTION_NAME,
+            vectors_config = models.VectorParams(
+                size = self._get_embedding_size(),
+                distance = models.Distance.COSINE
+            ),
+            timeout=60
+        )
 
     def _get_embedding_size(self) -> int:
         """Get vector dimensions based on model"""
