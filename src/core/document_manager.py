@@ -1,9 +1,11 @@
+import logging
 from pathlib import Path
 from src.core.document_parser import DocumentParser
 import hashlib
 from src.core.vector_manager import VectorManager
 from src.core.chunking import TextChunker
 
+logger = logging.getLogger(__name__)
 
 class DocumentManager:
     def __init__(self):
@@ -27,7 +29,7 @@ class DocumentManager:
                 return None
 
             doc_id = self._generate_doc_id(file_path)
-            chunks = self.chunker.chunk_text(content)
+            chunks = self.chunking.chunk_text(content)
             embeddings = self.vector_manager.generate_embeddings(chunks)
 
             self.loaded_documents[doc_id] = {
@@ -43,6 +45,7 @@ class DocumentManager:
         except Exception as e:
             logger.exception(f"Document processing failed: {str(e)}")
             raise DocumentProcessingError(Path(file_path).name, str(e)) from e
+
 
 
 

@@ -1,3 +1,4 @@
+import logging
 import tkinter as tk
 import json
 from tkinter import messagebox, filedialog
@@ -8,6 +9,11 @@ from src.core.file_manager import FileManager
 from src.core.llm.local_llm import LocalLLM
 from src.core.llm.openai_manager import OpenAIManager
 from src.config.settings import LLMConfig
+
+logging.basicConfig(
+    level = logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 
 class DocumentReasoner(tk.Tk):
     def __init__(self):
