@@ -5,6 +5,7 @@ from qdrant_client.http import exceptions as qdrant_exceptions
 from qdrant_client.http import models
 from sentence_transformers import SentenceTransformer
 from src.config.settings import EmbeddingModels, VectorConfig
+from uuid import uuid5, NAMESPACE_URL
 import numpy as np
 import logging
 
@@ -89,9 +90,10 @@ class VectorManager:
         try:
             points = []
             for idx, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
+                unique_id = str(uuid5(NAMESPACE_URL, f"{doc_id}_{idx}"))
                 points.append(
                     PointStruct(
-                        id=f"{doc_id}_{idx}",
+                        id=unique_id,
                         vector=embedding,
                         payload={
                             "doc_id": doc_id,

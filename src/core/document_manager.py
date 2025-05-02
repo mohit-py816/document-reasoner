@@ -1,7 +1,8 @@
 import logging
-from pathlib import Path
-from src.core.document_parser import DocumentParser
 import hashlib
+from pathlib import Path
+from src.config.settings import VectorConfig
+from src.core.document_parser import DocumentParser
 from src.core.vector_manager import VectorManager
 from src.core.chunking import TextChunker
 
@@ -43,10 +44,11 @@ class DocumentManager:
             self.vector_manager.store_embeddings(doc_id, chunks, embeddings)
             return doc_id
         except Exception as e:
-            logger.exception(f"Document processing failed: {str(e)}")
-            raise DocumentProcessingError(Path(file_path).name, str(e)) from e
-
-
+            logger.exception(f"Document processing failed")
+            raise DocumentProcessingError(
+                filename = Path(file_path).name,
+                reason = str(e)
+            ) from e
 
 
     def _generate_doc_id(self, file_path: str) -> str:

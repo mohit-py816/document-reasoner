@@ -22,8 +22,8 @@ class EmbeddingModels(Enum):
     BGE_BASE = "BAAI/bge-base-en-v1.5"
 
 class VectorConfig:
-    QDRANT_LOCATION = "qdrant:6333"
-    QDRANT_HOST = "qdrant"
+    QDRANT_LOCATION ="localhost:6333"  # "qdrant:6333"
+    QDRANT_HOST = "localhost"
     QDRANT_PORT = 6333
     COLLECTION_NAME = "document_embeddings"
     BATCH_SIZE = 32
