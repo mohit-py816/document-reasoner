@@ -35,6 +35,7 @@ wget https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/
 ```
 or you use GPT-4
 
-4. ```
+4. docker UP
+ ```
 docker compose up --build
 ```
