@@ -1,4 +1,4 @@
-from src.config.settings import VectorConfig
+from config.settings import VectorConfig
 
 class TextChunker:
     def __init__(self):

@@ -1,10 +1,10 @@
 import logging
 import hashlib
 from pathlib import Path
-from src.config.settings import VectorConfig
-from src.core.document_parser import DocumentParser
-from src.core.vector_manager import VectorManager
-from src.core.chunking import TextChunker
+from config.settings import VectorConfig
+from core.document_parser import DocumentParser
+from core.vector_manager import VectorManager
+from core.chunking import TextChunker
 
 logger = logging.getLogger(__name__)
 

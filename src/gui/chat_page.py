@@ -1,9 +1,10 @@
 import tkinter as tk
 from tkinter import ttk, scrolledtext
-from src.core.document_manager import DocumentManager
-from src.core.llm.openai_manager import OpenAIManager
-from src.core.llm.local_llm import LocalLLM
-from src.core.vector_manager import VectorManager
+from core.document_manager import DocumentManager
+from core.llm.openai_manager import OpenAIManager
+from core.llm.local_llm import LocalLLM
+from core.vector_manager import VectorManager
+from config.settings import VectorConfig
 
 class ChatPage(tk.Frame):
     def __init__(self, parent, controller):

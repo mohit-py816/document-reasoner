@@ -4,7 +4,7 @@ from qdrant_client.models import Distance, VectorParams, PointStruct
 from qdrant_client.http import exceptions as qdrant_exceptions
 from qdrant_client.http import models
 from sentence_transformers import SentenceTransformer
-from src.config.settings import EmbeddingModels, VectorConfig
+from config.settings import EmbeddingModels, VectorConfig
 from uuid import uuid5, NAMESPACE_URL
 import numpy as np
 import logging

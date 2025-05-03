@@ -2,13 +2,13 @@ import logging
 import tkinter as tk
 import json
 from tkinter import messagebox, filedialog
-from src.gui.upload_page import UploadPage
-from src.gui.chat_page import ChatPage
-from src.gui.history_panel import HistoryPanel
-from src.core.file_manager import FileManager
-from src.core.llm.local_llm import LocalLLM
-from src.core.llm.openai_manager import OpenAIManager
-from src.config.settings import LLMConfig
+from gui.upload_page import UploadPage
+from gui.chat_page import ChatPage
+from gui.history_panel import HistoryPanel
+from core.file_manager import FileManager
+from core.llm.local_llm import LocalLLM
+from core.llm.openai_manager import OpenAIManager
+from config.settings import LLMConfig
 
 logging.basicConfig(
     level = logging.INFO,

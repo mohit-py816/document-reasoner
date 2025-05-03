@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from PIL import Image, ImageTk
 from pathlib import Path
-from src.core.document_manager import DocumentManager
+from core.document_manager import DocumentManager
 
 class UploadPage(tk.Frame):
     def __init__(self, parent, controller):

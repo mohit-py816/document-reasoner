@@ -1,7 +1,7 @@
 from llama_cpp import Llama
 from pathlib import Path
-from src.config.settings import LLMConfig, LLMModels
-from src.core.llm.base_llm import BaseLLM
+from config.settings import LLMConfig, LLMModels
+from core.llm.base_llm import BaseLLM
 import logging
 
 logger = logging.getLogger(__name__)

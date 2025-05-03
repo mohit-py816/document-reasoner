@@ -5,8 +5,8 @@ services:
     networks:
       - python-ntwk
     environment:
-      DISPLAY: $WINDOWS_IP:0
-      LIBGL_ALWAYS_INDIRECT: 1
+      - DISPLAY=${DISPLAY}
+      - LIBGL_ALWAYS_INDIRECT=1
     env_file:
       - .env
     volumes:
